@@ -1,0 +1,16 @@
+
+.main {
+  flex: 0.35;
+  color: white;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}

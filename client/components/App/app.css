@@ -1,7 +1,7 @@
 
 .app {
   display: flex;
-  width: 70%;
-  margin: auto;
+  background-color: black;
+  font-size: 24px;
 }
 

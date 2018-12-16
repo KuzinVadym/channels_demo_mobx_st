@@ -1,0 +1,13 @@
+
+.main {
+  margin: 0 15px 0 15px;
+  width: 36px;
+  height: 36px;
+  padding: 2px;
+}
+
+.img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
