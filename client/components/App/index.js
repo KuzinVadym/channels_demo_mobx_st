@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
-import { Provider } from 'mobx-react';
 import { hot } from 'react-hot-loader'
-
-import { createChannelStore } from '../../stores'
+import { inject, observer } from 'mobx-react';
 import Channels from '../Channels'
 import Favorites from '../Favorites'
 import style from "./app.css";
 
-const store = createChannelStore({channels: []});
-
+@inject('store')
+@observer
 class App extends Component {
   
   componentDidMount() {
-    store.loadChannels();
+    this.props.store.loadChannels();
   }
   
   render() {
     return (
-        <Provider store={store}>
-          <div className={style.app}>
-            <Channels title="My Channels" />
-            <Favorites title="Favorites" />
-          </div>
-        </Provider>
+      <div className={style.app}>
+        <Channels title="My Channels" />
+        <Favorites title="Favorites" />
+      </div>
     );
   }
 }
