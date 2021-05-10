@@ -4,11 +4,12 @@ import {IService} from '../../../../shared/interfaces/IService';
 import {IChannelsResponse} from '../../types';
 import {inject} from 'inversify';
 import {IChannelsHttpController} from '../../controllers/http/ChannelsHttpController';
+import {ConsumeMessage} from 'amqplib/properties';
 
 export interface IChannelsHttpService extends IService{
     getChannels: () => Promise<IChannelsResponse>;
-    channelsInfo: (msg: string) => Promise<void>;
-    channelsWarnings: (msg: string) => Promise<void>;
+    channelsInfo: (msg: ConsumeMessage) => Promise<void>;
+    channelsWarnings: (msg: ConsumeMessage) => Promise<void>;
 }
 
 @provide(SERVICE_IDENTIFIER.CHANNELS)

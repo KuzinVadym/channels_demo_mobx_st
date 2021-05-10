@@ -21,8 +21,8 @@ const mockChannelsRepo: IChannelsRepository = {
     find: mockFindChannelsFn
 };
 const mockChannelsPublisher: IMessageQueuePublisher = {
-    temp: jest.fn(),
-    new_temp: jest.fn()
+    channelsInfoPublisher: jest.fn(),
+    channelsWarningsPublisher: jest.fn()
 };
 
 describe("ChannelsHttpController", () => {

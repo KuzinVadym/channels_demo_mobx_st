@@ -4,14 +4,15 @@ import cors from 'cors';
 import {ISettings} from './shared/interfaces/ISettings';
 import {ILogger} from './shared/interfaces/ILogger';
 import {inject, injectable} from 'inversify';
-import {API_IDENTIFIER} from './shared/constants/identifiers';
+import {API_IDENTIFIER, MESSAGE_QUEUE_IDENTIFIER} from './shared/constants/identifiers';
 import {IHttpRoutes} from './shared/interfaces/IHttpRoutes';
-import {IMessageQueueSubscriber} from './api/message_queue/interfaces/IMessageQueueSubscriber';
+import {ISubscribers} from './api/message_queue/subscribers';
+import {IPublishers} from './api/message_queue/publishers';
 
 export interface IRootService {
     app: Express;
     setting: ISettings;
-    init: () => void;
+    init: () => Promise<void>;
     listen: () => void;
 }
 
@@ -23,11 +24,11 @@ export class RootService implements IRootService {
         @inject('logger') private readonly logger: ILogger,
         @inject('settings') private readonly settings: ISettings,
         @inject(API_IDENTIFIER.HTTP_ROUTES) private readonly httpRoutes: IHttpRoutes,
-        @inject(API_IDENTIFIER.MESSAGE_QUEUE_SUBSCRIBER) private readonly messageQueueSubscriber: IMessageQueueSubscriber){
-
+        @inject(MESSAGE_QUEUE_IDENTIFIER.SUBSCRIBERS) private readonly subscribers: ISubscribers,
+        @inject(MESSAGE_QUEUE_IDENTIFIER.PUBLISHERS) private readonly publishers: IPublishers){
     }
 
-    init(): void {
+    async init(): Promise<void> {
         this.logger.info('Init express service');
         this.app = express();
 

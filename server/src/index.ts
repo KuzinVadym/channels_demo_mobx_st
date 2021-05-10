@@ -15,7 +15,7 @@ const logger = pino();
 
         const rootService = rootContainer.getRootService()
 
-        rootService.init();
+        await rootService.init();
 
         rootService.listen();
     } catch (e) {
